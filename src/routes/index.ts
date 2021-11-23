@@ -1,16 +1,12 @@
 import { Router } from 'express';
+//import routes from './routes';
 
-const routes = Router();
+import { categoriesRoutes } from './categories.routes';
+import { specificationsRoutes } from './specifications.routes';
 
-routes.get('/', (request, response) => {
-  const { name, email } = request.body;
+const router = Router();
 
-  const user = {
-    name,
-    email,
-  };
+router.use('/categories', categoriesRoutes);
+router.use('/specifications', specificationsRoutes);
 
-  return response.json(user);
-});
-
-export default routes;
+export { router }
