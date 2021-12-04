@@ -1,11 +1,14 @@
-import { getRepository, Repository } from "typeorm";
-import { Specification } from "../../entities/Specification";
-import { ISpecificationsRepository, ICreateSpecificationDTO } from "../ISpecificationsRepository";
+import { getRepository, Repository } from 'typeorm';
 
+import {
+  ICreateSpecificationDTO,
+  ISpecificationsRepository,
+} from '@modules/cars/repositories/ISpecificationsRepository';
+
+import { Specification } from '../entities/Specification';
 
 class SpecificationsRepository implements ISpecificationsRepository {
-
-  private repository: Repository<Specification>
+  private repository: Repository<Specification>;
 
   constructor() {
     this.repository = getRepository(Specification);
@@ -21,7 +24,6 @@ class SpecificationsRepository implements ISpecificationsRepository {
     const specification = this.repository.findOne({ name });
     return specification;
   }
-
 }
 
-export { SpecificationsRepository }
+export { SpecificationsRepository };
