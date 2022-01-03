@@ -1,24 +1,35 @@
-import { getRepository, Repository } from "typeorm";
+import { getRepository, Repository } from 'typeorm';
 
-import { IUsersRepository } from "@modules/accounts/repositories/IUserRepository";
-import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
-import { User } from "../entities/User";
+import { ICreateUserDTO } from '@modules/accounts/dtos/ICreateUserDTO';
+import { IUsersRepository } from '@modules/accounts/repositories/IUserRepository';
 
+import { User } from '../entities/User';
 
 class UsersRepository implements IUsersRepository {
-
   private repository: Repository<User>;
 
   constructor() {
     this.repository = getRepository(User);
   }
 
-  async create({ name, email, driver_license, password, avatar, id }: ICreateUserDTO): Promise<void> {
+  async create({
+    name,
+    email,
+    driver_license,
+    password,
+    avatar,
+    id,
+  }: ICreateUserDTO): Promise<void> {
     const user = this.repository.create({
-      name, email, driver_license, password, avatar, id
+      name,
+      email,
+      driver_license,
+      password,
+      avatar,
+      id,
     });
 
-    await this.repository.save(user)
+    await this.repository.save(user);
   }
 
   async findByEmail(email: string): Promise<User> {
@@ -30,9 +41,6 @@ class UsersRepository implements IUsersRepository {
     const user = await this.repository.findOne(id);
     return user;
   }
-
-
-
 }
 
-export { UsersRepository }
+export { UsersRepository };
